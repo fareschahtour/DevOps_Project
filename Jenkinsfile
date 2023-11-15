@@ -32,20 +32,21 @@ pipeline {
                                   sh 'docker build -t fareschahtour .'
                                 }
                    }
-                    stage('DOCKER HUB') {
-                           steps {
-                             withCredentials([string(credentialsId: 'pass', variable: 'DOCKER_PASSWORD')]) {
-                               sh '''
-                                      docker login -u fareschahtour -p Fares1234567890
-                                      docker push fareschahtour/devops
-                                    '''
-                             }
-                           }
-                        }
+
                         stage('Docker COMPOSEE') {
                              steps {
                                    sh 'docker-compose up -d'
                              }
                         }
+                    stage('DOCKER HUB') {
+                                           steps {
+                                             withCredentials([string(credentialsId: 'pass', variable: 'DOCKER_PASSWORD')]) {
+                                               sh '''
+                                                      docker login -u fareschahtour -p Fares1234567890
+                                                      docker push fareschahtour/devops
+                                                    '''
+                                             }
+                                           }
+                                        }
       }
 }
