@@ -27,5 +27,10 @@ pipeline {
                    sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonarqube"
                   }
                 }
+                stage("DOCKER IMAGE") {
+                                steps {
+                                  sh 'docker build -t fareschahtour .'
+                                }
+                   }
       }
 }
