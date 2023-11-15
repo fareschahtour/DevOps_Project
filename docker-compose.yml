@@ -1,27 +1,21 @@
-version: "3.8"
+version: '3'
+
 services:
-  mysqldb:
-    image: mysql:5.7
-    restart: unless-stopped
+  mysql:
+    image: mysql:latest
+    networks:
+      - devops-network
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-    ports:
-      - "3306:3306"
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=devops
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=
     volumes:
-      - db:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
 
-  gestion-station-ski:
-    depends_on:
-      - mysqldb
-    image: fareschahtour/devops:1.0.0
-    restart: on-failure
-    environment:
-      MYSQL_ROOT_PASSWORD: ""  # Set to an empty string
-    ports:
-      - "8089:8089"
-    stdin_open: true
-    tty: true
-
+networks:
+  devops-network:
+    driver: bridge
 
 volumes:
-  db:
+  mysql-data:
