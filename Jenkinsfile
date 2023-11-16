@@ -42,8 +42,8 @@ pipeline {
                                            steps {
                                                     withCredentials([string(credentialsId: 'pass', variable: 'DOCKER_PASSWORD')]) {
                                                       sh '''
-                                                        docker login -u fareschahtour -p $DOCKER_PASSWORD
-                                                        docker push docker push fareschahtour/devops
+                                                        sudo docker login -u fareschahtour -p Fares1234567890
+                                                        sudo docker push docker push fareschahtour/devops
                                                       '''
                                                     }
                                                   }
