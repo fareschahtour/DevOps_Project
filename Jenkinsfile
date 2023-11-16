@@ -38,7 +38,7 @@ pipeline {
                                    sh 'docker compose up -d'
                              }
                         }
-                    stage('DOCKER HUB') {
+                    /*stage('DOCKER HUB') {
                                            steps {
                                                     withCredentials([string(credentialsId: 'pass', variable: 'dockerhubpwd')]) {
                                                       sh '''
@@ -47,6 +47,18 @@ pipeline {
                                                       '''
                                                     }
                                                   }
-                                        }
+                                        }*/
+      }
+      post {
+              always {
+               mail to: 'fares.chahtour@esprit.tn',
+           subject: "${currentBuild.currentResult}",
+           body: """
+           project : ${env.JOB_NAME}
+           build number : ${env.BUILD_NUMBER}
+           url : ${env.BUILD_URL}
+           """
+
+           }
       }
 }
