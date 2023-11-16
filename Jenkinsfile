@@ -40,10 +40,10 @@ pipeline {
                         }
                     stage('DOCKER HUB') {
                                            steps {
-                                                    withCredentials([string(credentialsId: 'pass', variable: 'DOCKER_PASSWORD')]) {
+                                                    withCredentials([string(credentialsId: 'pass', variable: 'dockerhubpwd')]) {
                                                       sh '''
-                                                        docker login -u fareschahtour -p Fares1234567890
-                                                        docker push docker push fareschahtour/devops
+                                                        docker login -u fareschahtour -p ${dockerhubpwd}
+
                                                       '''
                                                     }
                                                   }
