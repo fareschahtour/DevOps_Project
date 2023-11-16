@@ -42,8 +42,9 @@ pipeline {
                                            steps {
                                                     withCredentials([string(credentialsId: 'pass', variable: 'DOCKER_PASSWORD')]) {
                                                       sh '''
-                                                        docker login -u fareschahtour -p Fares1234567890
-                                                        docker push docker push fareschahtour/devops
+                                                        sudo chmod 666 /var/run/docker.sock
+                                                        docker login -u chahinemahfoudh -p 191JMT4619
+                                                        docker push docker push chahinemahfoudh/alpine
                                                       '''
                                                     }
                                                   }
