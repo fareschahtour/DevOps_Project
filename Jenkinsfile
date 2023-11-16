@@ -29,7 +29,7 @@ pipeline {
                 }
                 stage("DOCKER IMAGE") {
                                 steps {
-                                  sh 'docker build -t fareschahtour .'
+                                  sh 'docker build -t fareschahtour/devops:latest .'
                                 }
                    }
 
