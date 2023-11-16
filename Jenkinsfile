@@ -43,7 +43,7 @@ pipeline {
                                                     withCredentials([string(credentialsId: 'pass', variable: 'dockerhubpwd')]) {
                                                       sh '''
                                                         docker login -u fareschahtour -p ${dockerhubpwd}
-
+                                                        docker push docker push fareschahtour/devops
                                                       '''
                                                     }
                                                   }
