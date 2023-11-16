@@ -1,21 +1,27 @@
-version: '3'
-
+version: "3.8"
 services:
-  mysql:
-    image: mysql:latest
-    networks:
-      - devops-network
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD=root_password
-      - MYSQL_DATABASE=devops
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3306:3306"
     volumes:
-      - mysql-data:/var/lib/mysql
+      - db:/var/lib/mysql
 
-networks:
-  devops-network:
-    driver: bridge
+  devops:
+    depends_on:
+      - mysqldb
+    image: fareschahtour/devops:latest
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: ""  # Set to an empty string
+    ports:
+      - "8089:8089"
+    stdin_open: true
+    tty: true
+
 
 volumes:
-  mysql-data:
+  db:
